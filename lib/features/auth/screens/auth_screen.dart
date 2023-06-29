@@ -1,3 +1,4 @@
+import 'package:amazon_clone/common/widgets/custom_button.dart';
 import 'package:amazon_clone/common/widgets/custom_textField.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +44,13 @@ class _AuthScreenState extends State<AuthScreen> {
                 'Welcome',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
               ),
+              const SizedBox(height: 10,),
               ListTile(
-                title: const Text('Create Account', style: TextStyle(fontWeight: FontWeight.w500),),
+                tileColor: _auth == Auth.signUp ? GlobalVariables.backgroundColor : null,
+                title: const Text(
+                  'Create Account',
+                  style: TextStyle(fontWeight: FontWeight.w500),
+                ),
                 leading: Radio(
                   activeColor: GlobalVariables.secondaryColor,
                   groupValue: _auth,
@@ -68,16 +74,31 @@ class _AuthScreenState extends State<AuthScreen> {
                           controller: _nameController,
                           hintText: 'Name',
                         ),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         CustomTextField(
                             controller: _emailController, hintText: 'Email'),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         CustomTextField(
-                            controller: _passwordController, hintText: 'Password')
+                            controller: _passwordController,
+                            hintText: 'Password'),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomButton(text: 'Sign-up', onTap: () {}),
                       ],
                     ),
                   ),
                 ),
               ListTile(
-                title: const Text('Sign-in.', style: TextStyle(fontWeight: FontWeight.w500),),
+                tileColor: _auth == Auth.signIn ? GlobalVariables.backgroundColor : null ,
+                title: const Text(
+                  'Sign-in.',
+                  style: TextStyle(fontWeight: FontWeight.w500),
+                ),
                 leading: Radio(
                   activeColor: GlobalVariables.secondaryColor,
                   groupValue: _auth,
@@ -89,6 +110,34 @@ class _AuthScreenState extends State<AuthScreen> {
                   value: Auth.signIn,
                 ),
               ),
+
+              if (_auth == Auth.signIn)
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  color: GlobalVariables.backgroundColor,
+                  child: Form(
+                    key: _signInFormKey,
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomTextField(
+                            controller: _emailController, hintText: 'Email'),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomTextField(
+                            controller: _passwordController,
+                            hintText: 'Password'),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomButton(text: 'Sign-in', onTap: () {}),
+                      ],
+                    ),
+                  ),
+                ),
             ],
           ),
         ),
